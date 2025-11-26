@@ -36,8 +36,20 @@ class ListingsController < ApplicationController
 
   # PATCH/PUT /listings/1 or /listings/1.json
   def update
+    update_params = listing_params
+    # Only update images if new images are actually provided
+    # If images array is empty or all blank, exclude it to preserve existing images
+    if update_params[:images].present?
+      # Filter out any blank values and check if there are actual files
+      new_images = update_params[:images].reject(&:blank?)
+      if new_images.empty?
+        # No new images selected, preserve existing ones by excluding images from update
+        update_params = update_params.except(:images)
+      end
+    end
+
     respond_to do |format|
-      if @listing.update(listing_params)
+      if @listing.update(update_params)
         format.html { redirect_to @listing, notice: "Listing was successfully updated.", status: :see_other }
         format.json { render :show, status: :ok, location: @listing }
       else

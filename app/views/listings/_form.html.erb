@@ -28,6 +28,15 @@
 
   <div class="my-5">
     <%= form.label :images %>
+    <% if listing.images.attached? %>
+      <div class="grid grid-cols-4 gap-4 mb-4">
+        <% listing.images.each do |image| %>
+          <div class="relative">
+            <%= image_tag image, class: "w-full h-32 object-cover rounded-lg border border-gray-300" %>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
     <%= form.file_field :images, multiple: true, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": listing.errors[:images].none?, "border-red-400 focus:outline-red-600": listing.errors[:images].any?}] %>
   </div>
   <div class="grid grid-cols-3 gap-8 my-5">
