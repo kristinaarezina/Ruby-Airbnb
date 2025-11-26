@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :users
   resources :listings do
     get "photos", to: "listings#photos", on: :member
   end

@@ -30,6 +30,7 @@ gem "solid_cache"
 gem "solid_queue"
 gem "solid_cable"
 
+
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", require: false
 
@@ -70,3 +71,5 @@ group :test do
 end
 
 gem "devise", "~> 4.9"
+
+gem "tailwind_devise", "~> 0.0.3"
