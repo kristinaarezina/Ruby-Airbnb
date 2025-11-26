@@ -31,16 +31,20 @@
     <%= form.file_field :images, multiple: true, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": listing.errors[:images].none?, "border-red-400 focus:outline-red-600": listing.errors[:images].any?}] %>
   </div>
   <div class="grid grid-cols-3 gap-8 my-5">
-  <div class="">
-    <%= form.label :bedrooms %>
-    <%= form.number_field :bedrooms, multiple: true, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": listing.errors[:images].none?, "border-red-400 focus:outline-red-600": listing.errors[:images].any?}], min:0 %>
-  </div>
+    <div class="">
+      <%= form.label :bedrooms %>
+      <%= form.number_field :bedrooms, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": listing.errors[:bedrooms].none?, "border-red-400 focus:outline-red-600": listing.errors[:bedrooms].any?}], min: 0 %>
+    </div>
 
-  
-  <div class="">
-    <%= form.label :bathrooms %>
-    <%= form.number_field :bathrooms, multiple: true, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": listing.errors[:images].none?, "border-red-400 focus:outline-red-600": listing.errors[:images].any?}], min:0 %>
-  </div>
+    <div class="">
+      <%= form.label :bathrooms %>
+      <%= form.number_field :bathrooms, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": listing.errors[:bathrooms].none?, "border-red-400 focus:outline-red-600": listing.errors[:bathrooms].any?}], min: 0 %>
+    </div>
+
+    <div class="">
+      <%= form.label :people_limit %>
+      <%= form.number_field :people_limit, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", {"border-gray-400 focus:outline-blue-600": listing.errors[:people_limit].none?, "border-red-400 focus:outline-red-600": listing.errors[:people_limit].any?}], min: 0 %>
+    </div>
   </div>
 
   <div class="inline">
