@@ -60,7 +60,7 @@ class ListingsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_listing
-      @listing = Listing.find(params.expect(:id))
+      @listing = Listing.friendly.find(params.expect(:id))
     end
 
     # Only allow a list of trusted parameters through.
