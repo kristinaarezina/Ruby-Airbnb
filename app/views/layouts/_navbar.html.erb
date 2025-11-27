@@ -1,5 +1,22 @@
-<div class="w-full h-16 flex items-center border-b border-gray-100 fixed top-0 bg-white">
-    <div class="max-w-7xl w-full mx-auto">
-    <%= link_to "Home", "/", class: "font-bold"%>
+<div class="w-full h-16 flex items-center border-b border-gray-100 fixed top-0 bg-white margin-10">
+  <div class="max-w-7xl w-full mx-auto flex items-center justify-between items-center">
+    <%= link_to "Home", "/", class: "font-bold" %>
+    <div>
+    <% if !current_user %>
+    <%= link_to "Sign in", new_user_session_path, class: "rounded-lg shadow-lg border-2 border-gray-100 font-semibold p-2"%>
+    <%= link_to "Create acount", new_user_registration_path, class: "rounded-lg border-2 border-indigo-500 font-semibold p-2 bg-gradient-to-r from-indigo-500 to-pink-500 text-pink-100 "%>
+    <% else %>
+        <div class="relative" data-controller="dropdown">
+            <button class="" data-action="click->dropdown#toggle">
+                Profile
+            </button>
+
+            <div class="absolute top-12 -left-32 w-40 h-64 bg-white border-2 border-gray-200 rounded-lg" 
+                data-dropdown-target="menu">
+            </div>
+        </div>
+        
+    <%end%>
+    </div>
     </div>
 </div>
