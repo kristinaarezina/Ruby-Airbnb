@@ -1,0 +1,56 @@
+<div class="w-full h-16 fixed top-0 bg-white border-b border-gray-200 z-50">
+  <div class="max-w-7xl mx-auto h-full px-4 flex items-center justify-between">
+
+    <!-- Left: Home -->
+    <%= link_to "/", class: "font-bold text-lg text-gray-800 hover:text-indigo-600" do %>
+      Home
+    <% end %>
+
+    <!-- Right: Auth -->
+    <div class="flex items-center space-x-4">
+
+      <% if !current_user %>
+
+        <%= link_to "Sign in",
+          new_user_session_path,
+          class: "px-4 py-2 rounded-lg border border-gray-200 shadow-sm hover:bg-gray-50 transition" %>
+
+        <%= link_to "Create account",
+          new_user_registration_path,
+          class: "px-4 py-2 rounded-lg font-semibold bg-gradient-to-r from-indigo-500 to-pink-500 text-white shadow-lg hover:opacity-90 transition" %>
+
+      <% else %>
+
+        <!-- New Listing + Profile side by side -->
+        <%= link_to "New listing",
+          new_listing_path,
+          class: "px-4 py-2 rounded-lg font-semibold bg-gradient-to-r from-indigo-500 to-pink-500 text-white shadow hover:opacity-90 transition" %>
+
+        <div class="relative" data-controller="dropdown" data-action="click@window->dropdown#closeUnlessDropdown">
+          <button
+            class="px-4 py-2 rounded-lg border border-gray-200 bg-gray-50 hover:bg-gray-100 transition"
+            data-action="click->dropdown#toggle">
+            Profile
+          </button>
+
+          <!-- Dropdown -->
+          <div
+            class="absolute right-0 mt-2 w-40 bg-white border border-gray-200 rounded-lg shadow-lg hidden flex flex-col"
+            data-dropdown-target="menu">
+
+            <%= link_to "Settings",
+              settings_path,
+              class: "px-4 py-2 hover:bg-gray-100 rounded-t-lg" %>
+
+            <%= link_to "Sign out",
+              destroy_user_session_path,
+              data: { turbo_method: :delete },
+              class: "px-4 py-2 hover:bg-gray-100 rounded-b-lg" %>
+          </div>
+        </div>
+
+      <% end %>
+    </div>
+
+  </div>
+</div>

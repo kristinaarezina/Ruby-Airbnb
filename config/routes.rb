@@ -1,15 +1,30 @@
-Rails.application.routes.draw do
-  resources :listings
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+## config/routes.rb - Consolidated Version
 
-  # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
-  # Can be used by load balancers and uptime monitors to verify that the app is live.
+Rails.application.routes.draw do
+  # Devise must only be defined once
+  devise_for :users
+  
+  # Main Listings Resources
+  resources :listings do
+    get "photos", to: "listings#photos", on: :member
+    
+    # 1. Nested Checkouts resource (for the POST to create session)
+    resources :checkouts, only: [:create]
+    
+    # 2. Nested File Uploads resource (for Active Storage)
+    resources :file_uploads, only: [:create]
+  end
+
+  # Stripe Checkout Redirection Routes
+  get 'checkout/success', to: 'checkouts#success', as: :checkout_success 
+  get 'checkout/cancel', to: 'checkouts#cancel', as: :checkout_cancel
+  
+  # Singular Resources
+  resource :settings, only: [:show, :create]
+  resource :owner_signup, only: [:show], controller: :owner_signup
+
+  # Health Check and Root
   get "up" => "rails/health#show", as: :rails_health_check
 
-  # Render dynamic PWA files from app/views/pwa/* (remember to link manifest in application.html.erb)
-  # get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
-  # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
-
-  # Defines the root path route ("/")
-  root "listing#index"
+  root "listings#index"
 end
