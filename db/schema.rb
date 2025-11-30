@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2025_11_26_223545) do
+ActiveRecord::Schema[8.1].define(version: 2025_11_30_175723) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -69,6 +69,7 @@ ActiveRecord::Schema[8.1].define(version: 2025_11_26_223545) do
     t.integer "bedrooms"
     t.datetime "created_at", null: false
     t.integer "people_limit"
+    t.decimal "price"
     t.string "slug"
     t.string "title"
     t.datetime "updated_at", null: false
@@ -76,13 +77,22 @@ ActiveRecord::Schema[8.1].define(version: 2025_11_26_223545) do
   end
 
   create_table "users", force: :cascade do |t|
+    t.string "about_me"
+    t.string "address_1"
+    t.string "address_2"
+    t.string "city"
+    t.string "country"
     t.datetime "created_at", null: false
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
+    t.string "first_name"
+    t.string "last_name"
     t.datetime "remember_created_at"
     t.datetime "reset_password_sent_at"
     t.string "reset_password_token"
+    t.string "state"
     t.datetime "updated_at", null: false
+    t.string "zip_code"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

@@ -1,5 +1,6 @@
 class ListingsController < ApplicationController
   before_action :set_listing, only: %i[ show edit update destroy photos]
+  before_action :redirect_to_signup, only: ["new", "create"]
 
   # GET /listings or /listings.json
   def index
@@ -81,6 +82,10 @@ class ListingsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def listing_params
-      params.require(:listing).permit(:title, :address, :description, :bathrooms, :bedrooms, :people_limit, images: [])
+      params.require(:listing).permit(:title, :address, :description, :bathrooms, :bedrooms, :people_limit, :price, images: [])
     end
+
+    def redirect_to_signup 
+        redirect_to owner_signup_path
+    end 
 end
